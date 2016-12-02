@@ -19,17 +19,15 @@ before_install:
   - sudo update-java-alternatives -s java-8-oracle
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - java -version
-  - sudo rm -rf /var/lib/cassandra/*
   - wget https://github.com/apache/cassandra/archive/cassandra-$CVER.tar.gz && tar -xvzf cassandra-$CVER.tar.gz
   - sudo sh ./cassandra-cassandra-$CVER/bin/cassandra -R
   - sleep 20
 install:
-  - "mix do local.hex --force, local.rebar --force, deps.get"
+  - "MIX_ENV=test mix do local.hex --force, local.rebar --force, deps.get"
 script:
-  - "mix do espec, coveralls.travis"
+  - "MIX_ENV=test mix do espec, coveralls.travis"
 env:
-  - CVER=3.7
-  - MIX_ENV=test
+  - CVER=3.9
 notifications:
   recipients:
     - pavel@tatarsky.ru
