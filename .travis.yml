@@ -23,9 +23,13 @@ before_install:
   - sudo sh ./apache-cassandra-3.9/bin/cassandra -R
   - sleep 20
 install:
-  - "MIX_ENV=test mix do local.hex --force, local.rebar --force, deps.get"
+  - MIX_ENV=test mix do local.hex --force, local.rebar --force, deps.get
 script:
-  - "MIX_ENV=test mix do espec, coveralls.travis"
+  - MIX_ENV=test mix espec
+after_script:
+  - MIX_ENV=test mix coveralls.travis
+  - mix deps.get --only docs
+  - MIX_ENV=docs mix inch.report
 notifications:
   recipients:
     - pavel@tatarsky.ru

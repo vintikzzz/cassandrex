@@ -44,7 +44,8 @@ defmodule Cassandrex.Mixfile do
     [{:cqerl, github: "matehat/cqerl", tag: "v1.0.2", only: :test},
     {:espec, "~> 1.2.0", only: :test},
     {:excoveralls, "~> 0.5", only: :test},
-    {:ex_doc, "~> 0.14", only: :dev},
+    {:ex_doc, "~> 0.14", only: :doc},
+    {:inch_ex, ">= 0.0.0", only: :doc},
     {:credo, "~> 0.5", only: [:dev, :test]}]
   end
 
