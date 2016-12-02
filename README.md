@@ -92,11 +92,12 @@ iex> C.query(c, "SELECT name, legs, friendly FROM #{table}")
 
 ## Installation
 
-  1. Add `cassandrex` to your list of dependencies in `mix.exs`:
+  1. Add `cassandrex` and `cqerl` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
-      [{:cassandrex, "~> 0.1.0"}]
+      [{:cqerl, github: "matehat/cqerl", tag: "v1.0.2", only: :test},
+      {:cassandrex, "~> 0.1.0"}]
     end
     ```
 
