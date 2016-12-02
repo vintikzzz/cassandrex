@@ -20,6 +20,7 @@ before_install:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - java -version
   - wget https://github.com/apache/cassandra/archive/cassandra-$CVER.tar.gz && tar -xvzf cassandra-$CVER.tar.gz
+  - export CASSANDRA_HOME=cassandra-cassandra-$CVER
   - sudo sh ./cassandra-cassandra-$CVER/bin/cassandra -R
   - sleep 20
 install:
