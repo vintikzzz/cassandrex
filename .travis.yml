@@ -3,11 +3,19 @@ elixir:
   - 1.3.2
 otp_release:
   - 19.1
+sudo: required
+dist: trusty
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
+      - build-essential
+      - gcc-4.9
+      - g++-4.9
       - oracle-java8-installer
 before_install:
+  - export CXX="g++-4.9"
   - sudo update-java-alternatives -s java-8-oracle
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
   - java -version
@@ -15,8 +23,10 @@ before_install:
   - wget https://github.com/apache/cassandra/archive/cassandra-$CVER.tar.gz && tar -xvzf cassandra-$CVER.tar.gz
   - sudo sh ./cassandra-cassandra-$CVER/bin/cassandra -R
   - sleep 20
+install:
+  - "MIX_ENV=test mix deps.get"
 script:
-  - "MIX_ENV=test mix do deps.get, espec, coveralls.travis"
+  - "MIX_ENV=test mix do espec, coveralls.travis"
 env:
   - CVER=3.7
 notifications:
