@@ -27,9 +27,7 @@ install:
 script:
   - MIX_ENV=test mix espec
 after_script:
-  - MIX_ENV=test mix coveralls.travis
-  - mix deps.get --only docs
-  - MIX_ENV=docs mix inch.report
+  - MIX_ENV=test mix do coveralls.travis, inch.report
 notifications:
   recipients:
     - pavel@tatarsky.ru
