@@ -24,11 +24,12 @@ before_install:
   - sudo sh ./cassandra-cassandra-$CVER/bin/cassandra -R
   - sleep 20
 install:
-  - "MIX_ENV=test mix deps.get"
+  - "mix do local.hex --force, local.rebar --force, deps.get"
 script:
-  - "MIX_ENV=test mix do espec, coveralls.travis"
+  - "mix do espec, coveralls.travis"
 env:
   - CVER=3.7
+  - MIX_ENV=test
 notifications:
   recipients:
     - pavel@tatarsky.ru
