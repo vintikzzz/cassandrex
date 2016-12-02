@@ -13,7 +13,7 @@ before_install:
   - java -version
   - sudo rm -rf /var/lib/cassandra/*
   - wget https://github.com/apache/cassandra/archive/cassandra-$CVER.tar.gz && tar -xvzf cassandra-$CVER.tar.gz
-  - sudo sh ./cassandra-$CVER/bin/cassandra -R
+  - sudo sh ./cassandra-cassandra-$CVER/bin/cassandra -R
   - sleep 20
 script:
   - "MIX_ENV=test mix do deps.get, espec, coveralls.travis"
