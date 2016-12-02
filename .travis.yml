@@ -1,0 +1,24 @@
+language: elixir
+elixir:
+  - 1.3.2
+otp_release:
+  - 19
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+before_install:
+  - sudo update-java-alternatives -s java-8-oracle
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - java -version
+  - sudo rm -rf /var/lib/cassandra/*
+  - wget https://github.com/apache/cassandra/archive/cassandra-$CVER.tar.gz && tar -xvzf cassandra-$CVER.tar.gz
+  - sudo sh ./cassandra-$CVER/bin/cassandra -R
+  - sleep 20
+script:
+  - "MIX_ENV=test mix do deps.get, espec, coveralls.travis"
+env:
+  - CVER=3.7
+notifications:
+  recipients:
+    - pavel@tatarsky.ru
